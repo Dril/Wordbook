@@ -1,0 +1,75 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Wordbook</title>
+	<link rel="stylesheet" href="libs/css/jquery.mobile-1.2.0.min.css" />    
+    <script data-main="index" src="libs/js/require/require-2.1.1.min.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+      .ui-input-search {width: 100% !important;}
+
+      .ui-grid-a .block-last-words{width: 30%;}
+      .ui-grid-a .block-last-words .lang_from { text-align: left; }
+      .ui-grid-a .block-last-words .lang_to {text-align: right;}
+
+      .ui-grid-a .block-search-words{width: 70%;}
+      .ui-grid-a .block-last-words .list-last-words{width: 90%;}
+      .ui-grid-a .block-last-words ul li {font-size: 12px;}      
+    </style>
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header" data-position="fixed">
+	    <h1 id="twi_acc">Wordbook</h1>
+        <a href="#settings" data-icon="gear" class="ui-btn-right">Options</a>
+    </div>
+    <div data-role="content">      
+      <fieldset class="ui-grid-a">
+        <div id="wordList" class="ui-block-a block-last-words">
+      <!--
+        <div class="ui-block-a block-last-words">         
+            <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow list-last-words">
+                <li class="ui-li ui-li-static ui-btn-up-c ui-corner-top">
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a lang_from">Occasionally</div><div class="ui-block-b lang_to">Иногда</div>
+                    </fieldset>
+                </li>
+                <li class="ui-li ui-li-static ui-btn-up-c">
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a lang_from">Car</div><div class="ui-block-b lang_to">Машина</div>
+                    </fieldset>
+                 </li>
+                <li class="ui-li ui-li-static ui-btn-up-c">
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a lang_from">Rely</div><div class="ui-block-b lang_to">Полагаься/Надеяться</div>
+                    </fieldset>
+                </li>
+                <li class="ui-li ui-li-static ui-btn-up-c">
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a lang_from">Recognize</div><div class="ui-block-b lang_to">Признавать/распозновать</div>
+                    </fieldset>
+                </li>
+                <li class="ui-li ui-li-static ui-btn-up-c ui-corner-bottom ui-li-last">
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a lang_from">Best</div><div class="ui-block-b lang_to">Лучший</div>
+                     </fieldset>
+                </li>
+            </ul> 
+        </div>    
+      -->
+        </div>
+        <div class="ui-block-b block-search-words">
+            <div data-role="fieldcontain">
+               <input type="search" name="search" id="search" value="" data-theme="b" data="true" />
+            </div>            
+	        <ul data-role="listview" data-inset="true" data-theme="b">
+               <li><a href="#search">Search</a></li>
+               <li><a href="#settings">Options</a></li>
+            </ul> 						
+        </div>
+      </fieldset>
+    </div>    
+	<div data-role="footer" data-position="fixed">Blyschyk.Andrew@gmail.com</div> 
+</div>
+</body>
+</html>
