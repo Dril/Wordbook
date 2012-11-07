@@ -4,10 +4,12 @@ define([
   'underscore',
   'backbone',
   'router',
-  'jqueryMobile'
-], function($, _, Backbone, Router, jqueryMobile){
+  'jqueryMobile',
+  'src/models/BaseModel'
+], function($, _, Backbone, Router, jqueryMobile, BaseModel){
   var initialize = function(){
     Router.initialize();
+    BaseModel.initDatabase();
   };
 
   return {

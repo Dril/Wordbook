@@ -44,7 +44,9 @@ define(['jquery', 'jqueryMobile', 'underscore', 'backbone'], function($, $m, _, 
 				                            this.configDatabase.version, 
 				                            this.configDatabase.displayName, 
 				                            this.configDatabase.maxSize);				  			
+
 				  this.createTables(WordbookDB, this);
+				  this.prePopulate(WordbookDB, this);
 			   }
 			} catch(e) {
 			  this.initErrorHandlerDatabase(e);
@@ -69,6 +71,19 @@ define(['jquery', 'jqueryMobile', 'underscore', 'backbone'], function($, $m, _, 
         	transaction.executeSql(self.queriesDatabase.createWordsRelationTable, [], self.nullDataHandlerCreateTable, self.errorHandlerCreateTable);
           });	    
        }, 
+
+      prePopulate: function(database, obj){
+      	var self = obj;
+	    database.transaction(
+	     function (transaction) {
+		   var data = ['firstword'];
+		     transaction.executeSql("INSERT INTO word_en(name) VALUES (?)", [data[0]]);
+		     transaction.executeSql("INSERT INTO word_en(name) VALUES (?)", [data[0]]);
+		     transaction.executeSql("INSERT INTO word_en(name) VALUES (?)", [data[0]]);
+		     transaction.executeSql("INSERT INTO word_en(name) VALUES (?)", [data[0]]);
+	       }
+	    );
+      }, 
       
       nullDataHandlerCreateTable: function() {
 

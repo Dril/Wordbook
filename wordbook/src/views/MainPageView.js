@@ -41,8 +41,7 @@ define([
         return _.template(MainPageTemplate, data);        
      }, 
      addWordAction: function(event) {
-        if (event.keyCode != 13) return;       
-        BaseModel.initDatabase();
+        if (event.keyCode != 13) return;               
         BaseModel.sendData(this.urls.add_word, this.appendWordAction);
      },
      appendWordAction: function() {
