@@ -18,7 +18,7 @@ define([
          this.words = this.words.add({word_from: "Car", word_to: "Машина"});
          this.words = this.words.add({word_from: "Rely", word_to: "Полагаься/Надеяться"}); 
          this.words = this.words.add({word_from: "Recognize", word_to: "Признавать/распозновать"});
-         this.words = this.words.add({word_from: "Best", word_to: "Лучший"});                        
+         this.words = this.words.add({word_from: "Best", word_to: "Лучший"});                                 
      },
 
      el: $("#main-page"),
@@ -35,13 +35,14 @@ define([
         var compiledTemplate = this.prepareTemplate();
         this.wordListContainer.html(compiledTemplate);
      },
-     prepareTemplate: function() {        
+     prepareTemplate: function() {
         var data = { words: this.words.models, _: _ };
         _.extend(data, MainPageHelper);
         return _.template(MainPageTemplate, data);        
      }, 
      addWordAction: function(event) {
         if (event.keyCode != 13) return;       
+        BaseModel.initDatabase();
         BaseModel.sendData(this.urls.add_word, this.appendWordAction);
      },
      appendWordAction: function() {
