@@ -13,7 +13,7 @@ require.config({
        backbone: {
             'deps': ['jquery', 'underscore'],
             'exports': 'Backbone'
-       }
+       }       
     }
 });
 require(['app'], function(App){	

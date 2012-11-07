@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" id="main-page">
     <div data-role="header" data-position="fixed">
 	    <h1 id="twi_acc">Wordbook</h1>
         <a href="#settings" data-icon="gear" class="ui-btn-right">Options</a>
@@ -26,46 +26,15 @@
     <div data-role="content">      
       <fieldset class="ui-grid-a">
         <div id="wordList" class="ui-block-a block-last-words">
-      <!--
-        <div class="ui-block-a block-last-words">         
-            <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow list-last-words">
-                <li class="ui-li ui-li-static ui-btn-up-c ui-corner-top">
-                    <fieldset class="ui-grid-a">
-                        <div class="ui-block-a lang_from">Occasionally</div><div class="ui-block-b lang_to">Иногда</div>
-                    </fieldset>
-                </li>
-                <li class="ui-li ui-li-static ui-btn-up-c">
-                    <fieldset class="ui-grid-a">
-                        <div class="ui-block-a lang_from">Car</div><div class="ui-block-b lang_to">Машина</div>
-                    </fieldset>
-                 </li>
-                <li class="ui-li ui-li-static ui-btn-up-c">
-                    <fieldset class="ui-grid-a">
-                        <div class="ui-block-a lang_from">Rely</div><div class="ui-block-b lang_to">Полагаься/Надеяться</div>
-                    </fieldset>
-                </li>
-                <li class="ui-li ui-li-static ui-btn-up-c">
-                    <fieldset class="ui-grid-a">
-                        <div class="ui-block-a lang_from">Recognize</div><div class="ui-block-b lang_to">Признавать/распозновать</div>
-                    </fieldset>
-                </li>
-                <li class="ui-li ui-li-static ui-btn-up-c ui-corner-bottom ui-li-last">
-                    <fieldset class="ui-grid-a">
-                        <div class="ui-block-a lang_from">Best</div><div class="ui-block-b lang_to">Лучший</div>
-                     </fieldset>
-                </li>
-            </ul> 
-        </div>    
-      -->
         </div>
         <div class="ui-block-b block-search-words">
-            <div data-role="fieldcontain">
-               <input type="search" name="search" id="search" value="" data-theme="b" data="true" />
-            </div>            
+          <div data-role="fieldcontain">
+             <input type="search" name="addword" id="addword" value="" data-theme="b" data="true" />
+          </div>
 	        <ul data-role="listview" data-inset="true" data-theme="b">
                <li><a href="#search">Search</a></li>
                <li><a href="#settings">Options</a></li>
-            </ul> 						
+          </ul>
         </div>
       </fieldset>
     </div>    
