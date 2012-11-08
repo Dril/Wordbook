@@ -1,98 +1,76 @@
-define(['jquery', 'jqueryMobile', 'underscore', 'backbone'], function($, $m, _, Backbone) {
+define(['jquery', 'jqueryMobile', 'underscore', 'backbone', 'src/config/DatabaseConfig'], function($, $m, _, Backbone, DatabaseConfig) {
 	var BaseModel = Backbone.Model.extend({
 		initialize: function() {},				
 	},
-	{
-	 self: this,		
-     sendData: function(_url, _handler, _data) {
-	    $m.showPageLoadingMsg();
-        $.ajax({
-            url:  _url,
-            data: _data || {},
-            type: "POST",
-            success: function(data) {
-               _handler();
-            },
-            error: function( jqXHR, textStatus, errorThrown ) {
-            }            
-            }).done(function() {            
-                $m.hidePageLoadingMsg();
-            });
-      },
-
-      //TODO: 1. add to config database file
-      configDatabase: {
-          shortName:   'Wordbook',
-          version:     '0.1',
-          displayName: 'Wordbook Database',
-          maxSize:     100000
-      },
-
-      //TODO: 2. add to config database file, merge with (1)
-      queriesDatabase: {     
-         createWordsFromTable:     'CREATE TABLE IF NOT EXISTS word_en(id INTEGER NOT NULL PRIMARY KEY, name TEXT NULL);',
-         createWordsToTable:       'CREATE TABLE IF NOT EXISTS word_ru(id INTEGER NOT NULL PRIMARY KEY, name TEXT NULL);',        
-         createWordsRelationTable: 'CREATE TABLE IF NOT EXISTS translate_en_ru(id INTEGER NOT NULL PRIMARY KEY, id_from INTEGER NOT NULL, id_to INTEGER NOT NULL);'         
-      }, 
+	{  
+     database: null,
+	   self: this,     
 
       initDatabase: function() {
 		   try {
 			   if (!window.openDatabase) {
 			       alert('Databases are not supported in this browser.');
 			   } else {	   
-				  WordbookDB = openDatabase(this.configDatabase.shortName,
-				                            this.configDatabase.version, 
-				                            this.configDatabase.displayName, 
-				                            this.configDatabase.maxSize);				  			
+				  this.database = WordbookDB = openDatabase(DatabaseConfig.shortName,
+				                                            DatabaseConfig.version, 
+				                                            DatabaseConfig.displayName, 
+				                                            DatabaseConfig.maxSize);				  			
 
-				  this.createTables(WordbookDB, this);
-				  this.prePopulate(WordbookDB, this);
+				  this.createTables(WordbookDB, this);			  
 			   }
 			} catch(e) {
 			  this.initErrorHandlerDatabase(e);
 			  return;
-  		    }
+  		  }
       },
 
-      errorHandlerInitDatabase: function() {
+      initErrorHandlerDatabase: function(e) {
           if (e == 2) {			   
-		      console.log("Invalid database version.");
-		  } else {
-			  console.log("Unknown error " + e + ".");
-		  }
+		          console.log("Invalid database version.");
+		      } else {
+			       console.log("Unknown error " + e + ".");
+		      }
       }, 
 
       createTables: function(database, obj)  {      	
-      	var self = obj;
-	    database.transaction(
-          function (transaction) {          	
-        	transaction.executeSql(self.queriesDatabase.createWordsFromTable, [], self.nullDataHandlerCreateTable, self.errorHandlerCreateTable);
-        	transaction.executeSql(self.queriesDatabase.createWordsToTable, [], self.nullDataHandlerCreateTable, self.errorHandlerCreateTable);
-        	transaction.executeSql(self.queriesDatabase.createWordsRelationTable, [], self.nullDataHandlerCreateTable, self.errorHandlerCreateTable);
-          });	    
-       }, 
+         var self = obj;
+	       database.transaction(
+            function (transaction) {         	
+        	  transaction.executeSql(DatabaseConfig.queries.createWordsFromTable, [], self.nullDataHandler, self.errorHandler);
+        	  transaction.executeSql(DatabaseConfig.queries.createWordsToTable, [], self.nullDataHandler, self.errorHandler);
+        	  transaction.executeSql(DatabaseConfig.queries.createWordsRelationTable, [], self.nullDataHandler, self.errorHandler);
+          });
+       },     
 
-      prePopulate: function(database, obj){
-      	var self = obj;
-	    database.transaction(
-	     function (transaction) {
-		   var data = ['firstword'];
-		     transaction.executeSql("INSERT INTO word_en(name) VALUES (?)", [data[0]]);
-		     transaction.executeSql("INSERT INTO word_en(name) VALUES (?)", [data[0]]);
-		     transaction.executeSql("INSERT INTO word_en(name) VALUES (?)", [data[0]]);
-		     transaction.executeSql("INSERT INTO word_en(name) VALUES (?)", [data[0]]);
-	       }
-	    );
-      }, 
+      executeQuery: function(query, handler) {      
+          this.database.transaction(
+              function (transaction) {
+                  transaction.executeSql(query, [], handler, self.errorHandlerCreateTable);
+          });
+      },       
       
-      nullDataHandlerCreateTable: function() {
-
+      nullDataHandler: function() {
       }, 
 
-      errorHandlerCreateTable: function() {
+      errorHandler: function() {
+      },
 
-      }
-
+      sendData: function(_url, _handler, _context, _data) {
+      $m.showPageLoadingMsg();
+        $.ajax({
+            url:  _url,
+            data: _data || {},
+            type: "POST",
+            context: _context,
+            success: function(data) {
+               _handler(data, _context);
+            },
+            error: function( jqXHR, textStatus, errorThrown ) {
+            }            
+            }).done(function() {            
+                $m.hidePageLoadingMsg();
+            });
+      }        
 	});
 
 	return BaseModel;
