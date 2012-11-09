@@ -13,8 +13,8 @@ define([
      initialize: function() {        
      },     
 
-     el: $("#main-page"),
-     wordListContainer: this.$("#main-page").find("#wordList"),
+     el: $("#testPage"),
+     wordListContainer: this.$("#testPage").find("#home"),
 
      events: {
        //'keypress #addword': 'addWordAction'

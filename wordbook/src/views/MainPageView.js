@@ -19,7 +19,7 @@ define([
 
      events: {
        'keypress #addword': 'addWordAction',
-       'click #editwords': 'changePageAction'       
+       'taphold #editwords': 'changePageAction'       
      },
 
      renderList: function(_words, view) {
@@ -35,10 +35,10 @@ define([
 
      addWordAction: function(event) {
         if (event.keyCode != 13) return;
-        var word = $(event.target).val();        
+        var word = $(event.target).val();
         WordsModel.addWords(word, this.addWordActionHandler, this);
-
-     }, 
+     },
+      
      addWordActionHandler: function(data, view) {
         this.words = new WordsCollection();
         _.each(data, function(val) {

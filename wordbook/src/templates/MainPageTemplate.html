@@ -1,6 +1,6 @@
     <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow list-last-words">
       <% _.each(words, function(word, key){ %>               
-            <li class="ui-li ui-li-static ui-btn-up-c <%= getCurrentClass(words, key) %>" >
+            <li class="ui-li ui-li-static ui-btn-up-c <%= getCurrentHtmlClass(words, key) %> <%= getEmptyTranslateHtmlClass(word) %>" >
                 <fieldset class="ui-grid-a">
                     <div class="ui-block-a lang_from"><%= word.get("word_from") %></div>
                     <div class="ui-block-b lang_to"><%= word.get("word_to") %></div>

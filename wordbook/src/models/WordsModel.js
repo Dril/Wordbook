@@ -21,9 +21,17 @@ define(['underscore',
 
      addWords: function(word, resultHandler, objectView) {
          var obj = this;
-	     BaseModel.database.transaction(
+	       BaseModel.database.transaction(
               function (transaction) {            
-                 transaction.executeSql(DatabaseConfig.queries.insertEnWordQuery, [word]);                 
+                 transaction.executeSql(DatabaseConfig.queries.insertEnWordQuery, [word], function(t, data) {
+                     var lastEnWordrId= data.insertId;
+                      transaction.executeSql(DatabaseConfig.queries.insertRuWordQuery, [''], function(t, data) {
+                         var lastRuWordrId= data.insertId;
+                           transaction.executeSql(DatabaseConfig.queries.insertEnRuWordQuery, [lastEnWordrId, lastRuWordrId], function(t, data) {                              
+                              obj.selectAllWords(resultHandler, objectView);
+                           });
+                      });
+                 });
             });
          return this; 
      },
@@ -32,10 +40,10 @@ define(['underscore',
          var obj = this;         
 	     BaseModel.database.readTransaction(
              function (transaction) {
-                 BaseModel.executeQuery(DatabaseConfig.queries.getAllWordsQuery, function(t, data) {                 	                    
+                 BaseModel.executeQuery(DatabaseConfig.queries.getAllWordsQuery, function(t, data) {
                                         obj.setResult(obj.getAllWordsResultHandler(data));
                                         resultHandler(obj.getResult(), objectView);
-                                       });
+                                       });                                   
             });
          return this;
      },

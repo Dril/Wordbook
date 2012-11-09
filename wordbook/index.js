@@ -1,6 +1,7 @@
 require.config({
   paths: {
-      'jquery': 'libs/js/jquery/jquery',
+      'jquery': 'libs/js/jquery/jquery',            
+      'jqmConfig': 'libs/js/jquery.mobile/jqueryMobileConfig',
       'jqueryMobile': 'libs/js/jquery.mobile/jqueryMobile',
       'underscore': 'libs/js/underscore/underscore',
       'backbone': 'libs/js/backbone/backbone',

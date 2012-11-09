@@ -16,7 +16,8 @@ define(['jquery', 'jqueryMobile', 'underscore', 'backbone', 'src/config/Database
 				                                            DatabaseConfig.displayName, 
 				                                            DatabaseConfig.maxSize);				  			
 
-				  this.createTables(WordbookDB, this);			  
+				  this.createTables(WordbookDB, this);
+          //this.dropTables(WordbookDB, this);
 			   }
 			} catch(e) {
 			  this.initErrorHandlerDatabase(e);
@@ -41,6 +42,16 @@ define(['jquery', 'jqueryMobile', 'underscore', 'backbone', 'src/config/Database
         	  transaction.executeSql(DatabaseConfig.queries.createWordsRelationTable, [], self.nullDataHandler, self.errorHandler);
           });
        },     
+
+      dropTables: function(database, obj) {
+        var self = obj;
+        database.transaction(
+           function(transaction) {
+           transaction.executeSql(DatabaseConfig.queries.droptTables, [], function(){ 
+               console.log('Drop tables');
+           });
+        });
+      },
 
       executeQuery: function(query, handler) {      
           this.database.transaction(

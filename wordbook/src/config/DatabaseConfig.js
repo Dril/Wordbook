@@ -13,11 +13,12 @@ define(['underscore',
                             'ORDER BY en.id DESC LIMIT 5', 
 
          insertEnWordQuery:        'INSERT INTO word_en(name)  VALUES (?)',
-         insertRuWordQuery:        'INSERT INTO word_en(name)  VALUES (?)',
-         insertEnRuWordQuery:      'INSERT INTO word_en(name)  VALUES (?)',
+         insertRuWordQuery:        'INSERT INTO word_ru(name)  VALUES (?)',
+         insertEnRuWordQuery:      'INSERT INTO translate_en_ru(id_from, id_to)  VALUES (?, ?)',
          createWordsFromTable:     'CREATE TABLE IF NOT EXISTS word_en(id INTEGER NOT NULL PRIMARY KEY, name TEXT NULL);',
          createWordsToTable:       'CREATE TABLE IF NOT EXISTS word_ru(id INTEGER NOT NULL PRIMARY KEY, name TEXT NULL);',        
-         createWordsRelationTable: 'CREATE TABLE IF NOT EXISTS translate_en_ru(id INTEGER NOT NULL PRIMARY KEY, id_from INTEGER NOT NULL, id_to INTEGER NOT NULL);'         
+         createWordsRelationTable: 'CREATE TABLE IF NOT EXISTS translate_en_ru(id INTEGER NOT NULL PRIMARY KEY, id_from INTEGER NOT NULL, id_to INTEGER NOT NULL);',
+         droptTables:              'DROP TABLE word_en; DROP TABLE word_ru; DROP TABLE translate_en_ru;'
         }
    };
 });
