@@ -1,16 +1,28 @@
 define(['underscore', 
-	     'backbone'], function(_, Backbone) {
+       'backbone'], function(_, Backbone) {
   return {
       shortName:   'Wordbook',
       version:     '0.1',
       displayName: 'Wordbook Database',
       maxSize:     100000,         
       queries: {
-          getAllWordsQuery: 'SELECT en.name AS `en_name`, ru.name AS `ru_name` ' + 
+         getAllWordsQuery: 'SELECT en.name AS `en_name`, ru.name AS `ru_name`, en.id AS `en_id`, ru.id AS `ru_id` ' + 
                             'FROM translate_en_ru AS `en_ru` ' +
-        	   	              'LEFT JOIN  word_en AS `en` ON en.id = en_ru.id_from ' +
-        	   	              'LEFT JOIN  word_ru AS `ru` ON ru.id = en_ru.id_to ' +
-                            'ORDER BY en.id DESC LIMIT 5', 
+                            'LEFT JOIN  word_en AS `en` ON en.id = en_ru.id_from ' +
+                            'LEFT JOIN  word_ru AS `ru` ON ru.id = en_ru.id_to ' +
+                            'ORDER BY en.id DESC LIMIT 10', 
+
+         getEnWordsWithRuQuery:  'SELECT en.name AS `en_name`, ru.name AS `ru_name`, en.id AS `en_id`, ru.id AS `ru_id` ' + 
+                                 'FROM word_en AS  `en` ' +
+                                 'LEFT JOIN  translate_en_ru AS `en_ru` ON en.id = en_ru.id_from ' +
+                                 'LEFT JOIN  word_ru AS `ru` ON ru.id = en_ru.id_to ' +
+                                 'ORDER BY en.id DESC LIMIT 10', 
+
+         updateRuWordQuery:        'UPDATE word_ru SET name = ? WHERE id = ?',
+
+         deleteRuWordQuery:        'DELETE FROM word_ru WHERE id = ?',
+         deleteEnWordQuery:        'DELETE FROM word_en WHERE id = ?',
+         deleteEnRuWordQuery:      'DELETE FROM translate_en_ru WHERE id_from = ?',
 
          insertEnWordQuery:        'INSERT INTO word_en(name)  VALUES (?)',
          insertRuWordQuery:        'INSERT INTO word_ru(name)  VALUES (?)',

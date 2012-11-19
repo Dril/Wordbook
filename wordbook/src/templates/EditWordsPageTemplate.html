@@ -1,17 +1,13 @@
-<div data-role="collapsible-set" data-theme="b" data-mini="true" class="ui-collapsible-set">
-      <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-collapsible-collapsed">
-         <h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a href="#" class="ui-collapsible-heading-toggle ui-btn ui-mini ui-btn-icon-left ui-corner-top ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="plus" data-iconpos="left" data-theme="b" data-mini="true"><span class="ui-btn-inner ui-corner-top"><span class="ui-btn-text">Section 1<span class="ui-collapsible-heading-status"> click to expand contents</span>
-      </span><span class="ui-icon ui-icon-shadow ui-icon-plus">&nbsp;</span></span></a></h3>
-      <div class="ui-collapsible-content ui-collapsible-content-collapsed" aria-hidden="true">        
-         <p>Collapsible content</p>
-      </div>
-   </div>      
-
-   <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-collapsible-collapsed">
-         <h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a href="#" class="ui-collapsible-heading-toggle ui-btn ui-mini ui-btn-icon-left ui-corner-top ui-btn-up-c" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="plus" data-iconpos="left" data-theme="b" data-mini="true"><span class="ui-btn-inner ui-corner-top"><span class="ui-btn-text">Section 1<span class="ui-collapsible-heading-status"> click to expand contents</span>
-      </span><span class="ui-icon ui-icon-shadow ui-icon-plus">&nbsp;</span></span></a></h3>
-      <div class="ui-collapsible-content ui-collapsible-content-collapsed" aria-hidden="true">        
-         <p>Collapsible content</p>
-      </div>
-   </dsiv>      
+<div data-role="collapsible-set" data-content-theme="b"> 
+  <% _.each(words, function(word, key){ %>         
+    <div data-role="collapsible" data-collapsed="true" rel="<%= word.get("en_id") %>">
+        <h3><%= word.get("word_from") %></h3>
+        <div class="ui-collapsible-content" aria-hidden="false">            
+             <input name="editword" id="editword" rel="<%= word.get("ru_id") %>" placeholder="New word" value="<%= word.get("word_to") %>" type="text" data="true">                                                                                                    
+        </div>
+        <div class="ui-collapsible-content" aria-hidden="false">
+             <a data-role="button" class="delete-word-button" href="" rel="<%= word.get("ru_id") %>_<%= word.get("en_id") %>">Delete</a>
+        </div>
+    </div>    
+ <% }); %>
 </div>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <title>My First Unit Test With Jasmine And RequireJS</title>
+
+    <!-- Include the Jasmine assets for running in an HTML page. -->
+    <link rel="stylesheet" type="text/css" href="../libs/css/jasmine/jasmine.css"></link>
+    <script type="text/javascript" src="../libs/js/jasmine/jasmine.js"></script>
+    <script type="text/javascript" src="../libs/js/jasmine/jasmine-html.js"></script>
+    
+    <script type="text/javascript">
+        var require = {
+            paths: {
+                "domReady": "../domReady",
+                "model": "spec/model"
+            }
+        };
+    </script>
+    <script type="text/javascript" src="../libs/js/require/require-2.1.1.min.js"></script>
+
+    <script type="text/javascript">
+
+        require(
+            [
+                "domReady!",
+                "spec/WordsModel"
+            ],
+            function( document ){
+            	
+                // Set up the HTML reporter - this is reponsible for
+                // aggregating the results reported by Jasmine as the
+                // tests and suites are executed.
+                jasmine.getEnv().addReporter(
+                    new jasmine.HtmlReporter()
+                );
+
+                // Run all the loaded test specs.
+                jasmine.getEnv().execute();
+            }
+        );
+
+    </script>
+
+</head>
+<body>
+    <!-- Left intentionally blank. -->
+</body>
+</html>

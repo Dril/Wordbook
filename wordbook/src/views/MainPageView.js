@@ -19,7 +19,8 @@ define([
 
      events: {
        'keypress #addword': 'addWordAction',
-       'taphold #editwords': 'changePageAction'       
+       'taphold #editwords': 'changePageAction',
+       'hover .list-last-word': 'showDeleteAction'       
      },
 
      renderList: function(_words, view) {
@@ -47,6 +48,12 @@ define([
         view.renderList(this.words.models, view);
       }, 
 
+      showDeleteAction: function(event) {
+         $(".hide-button").each(function() {
+            $(this).hide();
+         });
+         $(event.target).find(".hide-button").show();
+      },
      changePageAction: function()  {
      }
   });
