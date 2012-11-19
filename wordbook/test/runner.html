@@ -9,12 +9,28 @@
     <script type="text/javascript" src="../libs/js/jasmine/jasmine-html.js"></script>
     
     <script type="text/javascript">
-        var require = {
-            paths: {
-                "domReady": "../domReady",
-                "model": "spec/model"
-            }
-        };
+         require.config({
+        	  paths: {
+        		  "domReady":  "../domReady",
+                  "model":     "spec/model"
+        	      'jquery':    "../libs/js/jquery/jquery",            
+        	      'jqmConfig': "../libs/js/jquery.mobile/jqueryMobileConfig",
+        	      'jqueryMobile': "../libs/js/jquery.mobile/jqueryMobile",
+        	      'underscore':   "../libs/js/underscore/underscore",
+        	      'backbone':     "../libs/js/backbone/backbone",
+        	      'templates':    "../libs/js/templates"
+        	  },
+        	  'shim': {
+        	       underscore: {
+        	          'exports': '_'
+        	       },
+        	       backbone: {
+        	            'deps': ['jquery', 'underscore'],
+        	            'exports': 'Backbone'
+        	       }
+        	    }
+        	});
+
     </script>
     <script type="text/javascript" src="../libs/js/require/require-2.1.1.min.js"></script>
 
@@ -23,7 +39,13 @@
         require(
             [
                 "domReady!",
-                "spec/WordsModel"
+                "spec/WordsModel",
+                "jquery",
+                "jqmConfig",
+                "jqueryMobile",
+                "underscore",
+                "backbone",
+                "templates"
             ],
             function( document ){
             	
